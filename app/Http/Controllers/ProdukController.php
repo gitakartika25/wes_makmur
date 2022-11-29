@@ -43,12 +43,13 @@ class ProdukController extends Controller
         $validate = $request->validate([
             'namaProduk' => 'required|string',
             'kategori_id' => 'required',
-            'foto' => 'required|string',
-            'harga' => 'required|double',
+            'foto' => 'required',
+            'harga' => 'required',
             'descProduk' => 'required|string',
         ]);
 
         $validate['foto'] = $file;
+        $validate['status'] = 'aktif';
 
         Produk::create($validate);
 
@@ -64,8 +65,22 @@ class ProdukController extends Controller
      */
     public function show($id)
     {
-        //
+        $produk = Produk::find($id);
+        $produk->status = 'aktif'; // mengubah status menjadi aktif
+        $produk->update();
+
+        return redirect('produk');
     }
+
+    public function hide($id)
+    {
+        $produk = Produk::find($id);
+        $produk->status = 'nonaktif'; // mengubah status menjadi nonaktif
+        $produk->update();
+
+        return redirect('produk');
+    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -90,29 +105,21 @@ class ProdukController extends Controller
     public function update(Request $request, $id)
     {
         $produk = Produk::find($id);
-        $produk->request->all();
+        $p = $request->all();
       
-
-        $validate = $request->validate([
-            'namaProduk' => 'required|string',
-            'kategori_id' => 'required',
-            'foto' => 'required|string',
-            'harga' => 'required|double',
-            'descProduk' => 'required|string',
-        ]);
-
-       
 
         try 
         {
             $file = $request->file('foto')->store('produk/foto');
-            $validate['foto'] = $file;
-            $produk->update($validate);
+            $produk['foto'] = $file;
+            $produk['status'] = 'aktif';
+            $produk->update($p);
 
         }catch(Throwable $th)
         {
-            $validate['foto'] = $produk->foto;
-            $produk->update($validate);
+            $produk['foto'] = $produk->foto;
+            $produk['status'] = 'aktif';
+            $produk->update($p);
         }
 
         return redirect('produk');

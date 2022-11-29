@@ -46,6 +46,7 @@ class PostController extends Controller
             'tanggalDibuat' => 'required|date',
             
         ]);
+        $validate['status'] = 'aktif';
 
         Post::create($validate);
 
@@ -60,7 +61,18 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Post::find($id);
+        $post->status = 'aktif'; // mengubah status menjadi aktif
+        $post->update();
+
+        return redirect('post');
+    }
+
+    public function hide($id)
+    {
+        $post = Post::find($id);
+        $post->status = 'post'; // mengubah status menjadi nonaktif
+        $post->update();
     }
 
     /**
@@ -88,15 +100,9 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $post = Post::find($id);
-        $post->request->all();
-        $validate = $request->validate([
-            'judul' => 'required|string',
-            'produk_id' => 'required',
-            'isi' => 'required|string',
-            'tanggalDibuat' => 'required|date',
-            
-        ]);
-        $post->update($validate);
+        $post['status'] = 'aktif';
+        $p = $request->all();
+        $post->update($p);
 
         return redirect('post');
     }

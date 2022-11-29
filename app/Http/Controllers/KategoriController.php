@@ -43,7 +43,7 @@ class KategoriController extends Controller
             'namaKategori' => 'required|string',
             'descKategori' => 'required|string',
         ]);
-        
+
         Kategori::create($validate);
 
         return redirect('kategori');
@@ -83,13 +83,10 @@ class KategoriController extends Controller
     public function update(Request $request, $id)
     {
         $kategori = Kategori::find($id);
-        $kategori->request->all();
+        $k = $request->all();
 
-        $validate = $request->validate([
-            'namaKategori' => 'required|string',
-            'descKategori' => 'required|string',
-        ]);
-        $kategori->update($validate);
+      
+        $kategori->update($k);
 
         return redirect('kategori');
     }
@@ -104,5 +101,7 @@ class KategoriController extends Controller
     {
         $kategori = Kategori::find($id);
         $kategori->delete();
+
+        return redirect('kategori');
     }
 }

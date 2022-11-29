@@ -17,9 +17,9 @@ class EditorController extends Controller
      */
     public function index()
     {
-        $editor = User::all();
+        $user = User::all();
 
-        return view('admin.index_editor', compact('editor'));
+        return view('admin.index_user', compact('user'));
     }
 
     /**
@@ -30,7 +30,7 @@ class EditorController extends Controller
     public function create()
     {
         $role = Role::all();
-        return view('admin.create_editor', compact('role'));
+        return view('admin.create_user', compact('role'));
     }
 
     /**
@@ -39,21 +39,19 @@ class EditorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(array $data)
+    public function store(Request $request)
     {
-        return Validator::make($data, [
+        $validate = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'role_id' => ['required'],
         ]);
+        $validate['password'] = Hash::make($request['password']);
 
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'role_id' => 2,
-            'password' => Hash::make($data['password']),
-        ]);
+        User::create($validate);
+
+        return redirect('user');
     }
 
     /**
@@ -75,7 +73,10 @@ class EditorController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+        $role = Role::all();
+
+        return view('admin.edit_user', compact('user', 'role'));
     }
 
     /**
@@ -87,7 +88,11 @@ class EditorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $u = $request->all();
+        $user->update($u);
+
+        return redirect('user');
     }
 
     /**
@@ -98,6 +103,9 @@ class EditorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+
+        return redirect('user');
     }
 }
