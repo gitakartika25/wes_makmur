@@ -1,30 +1,28 @@
 @extends('master_admin')
 
-@section('title', 'Edit Produk')
+@section('title', 'Create Produk')
 
 @section('content')
 <div class="col-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Edit Produk</h4>
+        <h4 class="card-title">Tambahkan Produk</h4>
        
-        <form class="forms-sample" action="{{ route('produk.update', $produk->id) }}" method="POST" enctype="multipart/form-data">
+        <form class="forms-sample" action="{{ route('produk.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            @method('put')
           <div class="form-group">
             <label for="exampleInputName1">Nama Produk</label>
-            <input type="text" class="form-control @error('namaProduk') is-invalid @enderror" id="" placeholder="Masukkan nama produk" value="{{ $produk->namaProduk }}" name="namaProduk">
+            <input type="text" class="form-control @error('namaProduk') is-invalid @enderror" id="" placeholder="Masukkan nama produk" name="namaProduk">
           </div>
           <div class="form-group">
             <label for="exampleInputName1">Harga Produk</label>
-            <input type="number" class="form-control @error('harga') is-invalid @enderror" id="" placeholder="Masukkan harga produk" value="{{ $produk->harga }}" name="harga">
+            <input type="number" class="form-control @error('harga') is-invalid @enderror" id="" placeholder="Masukkan harga produk" name="harga">
           </div>
         
           <div class="form-group">
             <label for="exampleSelectGender">Kategori</label>
               <select class="form-control @error('kategori_id') is-invalid @enderror" id="exampleSelectGender" name="kategori_id">
-                <option  selected value="{{ $produk->kategori_id }}">{{ $produk->kategori->namaKategori }}</option>
-                <option disabled value="">Pilih Kategori</option>
+                <option selected disabled value="">Pilih Kategori</option>
                 @foreach($kategori as $k)
                 <option value="{{ $k->id }}">{{ $k->namaKategori }}</option>
                 @endforeach
@@ -32,9 +30,6 @@
             </div>
           <div class="form-group">
             <label>Foto</label>
-            <div class="">
-            </div>
-            <img src="{{ asset('storage/' .$produk->foto) }}" alt="image" style="width: 300px"/>
             <input type="file" name="foto" class="file-upload-default @error('foto') is-invalid @enderror">
             <div class="input-group col-xs-12">
               <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
@@ -46,7 +41,7 @@
          
           <div class="form-group">
             <label for="exampleTextarea1">Deskripsi Produk</label>
-            <textarea class="form-control @error('descProduk') is-invalid @enderror" id="exampleTextarea1" name="descProduk" rows="4">{{ $produk->descProduk }}</textarea>
+            <textarea class="form-control @error('descProduk') is-invalid @enderror" id="exampleTextarea1" name="descProduk" rows="4"></textarea>
           </div>
           <button type="submit" class="btn btn-primary mr-2">Submit</button>
         

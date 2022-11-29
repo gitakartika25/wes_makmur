@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('foto');
             $table->double('harga');
             $table->string('descProduk', 500);
-            $table->foreignId('kategori_id')->constrained('kategori')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->string('status');
+            $table->foreignId('kategori_id')->constrained('kategori')->cascadeOnDelete()->cascadeOnUpdate();    
             $table->timestamps();
         });
     }

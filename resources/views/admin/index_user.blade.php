@@ -1,14 +1,14 @@
 @extends('master_admin')
 
-@section('title', 'Data Kategori')
+@section('title', 'Data User')
 
 @section('content')
 
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Data Kategori</h4>
-        <a href="{{ route('kategori.create') }}" class="btn btn-primary">Tambah Kategori</a>
+        <h4 class="card-title">Data User</h4>
+        <a href="{{ route('user.create') }}" class="btn btn-primary">Tambah User</a>
         <div class="table-responsive">
           <table class="table table-striped">
             <thead>
@@ -17,34 +17,39 @@
                   No
                 </th>
                 <th>
-                  Nama Kategori
+                  Nama
                 </th>
                 <th>
-                  Deskripsi Kategori
+                  Email
                 </th>
-               
+                <th>
+                  Role
+                </th>
                 <th>
                   Action
                 </th>
               </tr>
             </thead>
             <tbody>
-            @foreach($kategori as $p)
+            @foreach($user as $p)
               <tr>
                 <td>
                     {{ $loop->iteration }}
                 </td>
+            
                 <td>
-                    {{ $p->namaKategori }}
+                    {{ $p->name }}
                 </td>
                 <td>
-                    {{ $p->descKategori }}
+                    {{ $p->email }}
                 </td>
-              
                 <td>
-                    <a href="/kategori/edit/{{ $p->id }}" class="btn btn-primary">Edit</a>
-                    <a href="deletekategori/{{ $p->id }}" class="btn btn-danger">Delete</a>
+                    {{ $p->role->namaRole }}
+                </td>
                 
+                <td>
+                    <a href="/user/edit/{{ $p->id }}" class="btn btn-primary">Edit</a>
+                    <a href="deleteuser{{ $p->id }}" class="btn btn-danger">Delete</a>
                 </td>
               </tr>
             @endforeach

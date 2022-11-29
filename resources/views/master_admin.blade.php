@@ -295,7 +295,7 @@
                         </a>
                         <div class="collapse" id="ui-basic">
                           <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{ url('postingan') }}">Data Postingan</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('post') }}">Data Postingan</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{ url('produk') }}">Data Produk</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{ url('kategori') }}">Data Kategori</a></li>
                             {{-- <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li> --}}
@@ -360,7 +360,7 @@
                         </a>
                         <div class="collapse" id="auth">
                             <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" href="{{ url('editor') }}"> Data User
+                                <li class="nav-item"> <a class="nav-link" href="{{ url('user') }}"> Data User
                                     </a></li>
                                 {{-- <li class="nav-item"> <a class="nav-link" href="{{ route('login') }}"> Login </a>
                                 </li>

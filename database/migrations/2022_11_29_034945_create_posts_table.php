@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('judul');
             $table->string('isi', 500);
             $table->string('penulis');
+            $table->string('status');
             $table->date('tanggalDibuat');
             $table->foreignId('produk_id')->constrained('produk')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
