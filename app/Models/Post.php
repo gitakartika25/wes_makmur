@@ -12,7 +12,8 @@ class Post extends Model
     protected $guarded = ['id'];
 
     public function produk(){
-        return $this->hasMany(Produk::class, 'produk_id'); // relasi post dengan produk, 1 post memiliki banyak produk
+        return $this->belongsTo(Produk::class, 'produk_id'); // relasi post dengan produk, 1 post mengandung 1 produk
     }
     
 }
+

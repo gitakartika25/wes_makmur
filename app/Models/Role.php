@@ -11,7 +11,7 @@ class Role extends Model
     protected $table;
     protected $guarded = ['id'];
 
-    public function user(){
-        return $this->belongsTo(User::class, 'role_id'); // relasi role dengan user, 1 role dimiliki oleh 1 user
-    }
+    // public function user(){
+    //     return $this->belongsTo(User::class, 'role_id'); // relasi role dengan user, 1 role dimiliki oleh 1 user
+    // }
 }

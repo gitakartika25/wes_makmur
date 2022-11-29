@@ -21,7 +21,12 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id',
     ];
+
+    public function role(){
+        return $this->belongsTo(Role::class, 'role_id'); // relasi role dengan user, 1 role dimiliki oleh 1 user
+    }
 
     /**
      * The attributes that should be hidden for serialization.
